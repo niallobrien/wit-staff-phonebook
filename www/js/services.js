@@ -7,19 +7,27 @@ angular.module('WITPhoneApp.services', [])
  * A simple example service that returns some data.
  */
     .factory('StaffList', function ($http) {
+        var staffList = [];
         return {
             all: function () {
-                return $http({
-                    method: 'GET',
-                    cache: true,
-                    url: 'http://www.wit.ie/api/get_channel_entries?channel_id=60'
-                })
+                return staffList = $http.get('http://www.wit.ie/api/get_channel_entries?channel_id=60', {
+                    cache: true
+                });
             },
             get: function (staffId) {
-                return $http({
-                    method: 'GET',
-                    cache: true,
-                    url: 'http://www.wit.ie/api/get_channel_entry?entry_id=' + staffId
+                // fetch the data first
+                if (staffList == '') {
+                    staffList = this.all();
+                }
+
+                // TODO: refactor so it searches through staffList and not make another http call
+                staffList.success(function (data) {
+                    console.log(data);
+                    for (i = 0; i < data.length; i++) {
+                        if (staffId === data[i].entry_id) {
+                            return data[i];
+                        }
+                    }
                 });
             }
         }
