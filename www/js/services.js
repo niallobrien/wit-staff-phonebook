@@ -7,9 +7,12 @@ angular.module('WITPhoneApp.services', [])
  * A simple example service that returns some data.
  */
     .factory('StaffList', function ($http) {
-        var staffList = [];
+        var staffList = [],
+            staffMember = {};
+
         return {
             all: function () {
+                // returns promise object
                 return staffList = $http.get('http://www.wit.ie/api/get_channel_entries?channel_id=60', {
                     cache: true
                 });
@@ -19,13 +22,11 @@ angular.module('WITPhoneApp.services', [])
                 if (staffList == '') {
                     staffList = this.all();
                 }
-
-                // TODO: refactor so it searches through staffList and not make another http call
-                staffList.success(function (data) {
-                    console.log(data);
-                    for (i = 0; i < data.length; i++) {
-                        if (staffId === data[i].entry_id) {
-                            return data[i];
+                // search through staffList so not to make another http call
+                return staffList.then(function(response) {
+                    for (i = 0; i < response.data.length; i++) {
+                        if (staffId === response.data[i].entry_id) {
+                            return response.data[i];
                         }
                     }
                 });
