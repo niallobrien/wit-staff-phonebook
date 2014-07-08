@@ -2,6 +2,7 @@ Ionic App Base
 =====================
 
 open -a Google\ Chrome --args --disable-web-security
+open -a Google\ Chrome\ Canary --args --disable-web-security
 
 A starting project for Ionic that optionally supports
 using custom SCSS.

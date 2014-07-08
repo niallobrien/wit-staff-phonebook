@@ -7,7 +7,7 @@
           </label>
       </div>
       <ion-list>
-      <ion-item ng-repeat="person in staff track by $index| filter:searchStaffList | orderBy:'title'" type="item-text-wrap" href="#/tab/staff/{{person.entry_id}}">
+      <ion-item ng-repeat="person in staff | filter:searchStaffList | orderBy:'title'" type="item-text-wrap" href="#/tab/staff/{{person.entry_id}}">
         {{person.title}}
       </ion-item>
     </ion-list>

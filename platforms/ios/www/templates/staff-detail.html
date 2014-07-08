@@ -1,0 +1,37 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'firend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view title="{{person.title}}">
+  <ion-content has-header="true" padding="true">
+
+      <div class="col-67">
+          <h2>{{person.directory_title}}&nbsp;{{person.directory_first_name}}&nbsp;{{person.directory_last_name}}</h2>
+          <h3>{{person.directory_post_nominals}}</h3>
+      </div>
+      <div ng-show="person.directory_avatar" class="col-33">
+          <img src='{{person.directory_avatar.replace("{filedir_49}","http://www.wit.ie/images/uploads/Staff_Profile_Pics/")}}' width='100%' />
+      </div>
+      <div ng-show="person.building" class="item item-text-wrap">
+          Building: {{person.building}}
+      </div>
+      <div ng-show="person.directory_room_number" class="item item-text-wrap">
+          Room Number: {{person.directory_room_number}}
+      </div>
+      <div ng-show="person.directory_external_phone" class="item item-text-wrap item-icon-right">
+          <i class="icon ion-ios7-telephone"></i>
+          Phone: <a href="tel:+353{{person.directory_external_phone}}">{{person.directory_external_phone}}</a>
+      </div>
+      <div ng-show="person.directory_extension"  class="item item-text-wrap item-icon-right">
+          Extension: {{person.directory_extension}}
+      </div>
+      <div ng-show="person.directory_email"  class="item item-text-wrap item-icon-right">
+          <i class="icon ion-email"></i>
+          Email: <a href="mailto:{{person.directory_email}}">{{person.directory_email}}</a>
+      </div>
+
+
+  </ion-content>
+</ion-view>
