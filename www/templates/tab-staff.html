@@ -18,6 +18,7 @@
                collection-item-width="'100%'"
                collection-item-height="60"
                ng-href="#/tab/staff/{{person.entry_id}}">
+                <img ng-if="person.directory_avatar" ng-src="http://www.wit.ie{{person.directory_avatar}}" width="30" height="30">
                 {{person.title}}
             </a>
         </div>

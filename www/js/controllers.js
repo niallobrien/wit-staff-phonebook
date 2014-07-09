@@ -6,6 +6,7 @@ angular.module('WITPhoneApp.controllers', [])
             $scope.staff = [];
             for (var i = 0; i < staffList.length; i++) {
                 $scope.staff.push(staffList[i]);
+                //console.log($scope.staff);
             }
         } else {
             StaffList.all().success(function (response) {

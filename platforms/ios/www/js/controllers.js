@@ -3,7 +3,11 @@ angular.module('WITPhoneApp.controllers', [])
     .controller('StaffCtrl', function ($scope, StaffList) {
         var staffList = angular.fromJson(window.localStorage['staff_list']);
         if (staffList) {
-            $scope.staff = staffList;
+            $scope.staff = [];
+            for (var i = 0; i < staffList.length; i++) {
+                $scope.staff.push(staffList[i]);
+                //console.log($scope.staff);
+            }
         } else {
             StaffList.all().success(function (response) {
                 StaffList.save(angular.toJson(response));

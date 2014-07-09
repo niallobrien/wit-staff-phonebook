@@ -12,7 +12,7 @@
           <h3>{{person.directory_post_nominals}}</h3>
       </div>
       <div ng-show="person.directory_avatar" class="col-33">
-          <img src='{{person.directory_avatar.replace("{filedir_49}","http://www.wit.ie/images/uploads/Staff_Profile_Pics/")}}' width='100%' />
+          <img src='http://www.wit.ie{{person.directory_avatar}}' width='100%' />
       </div>
       <div ng-show="person.building" class="item item-text-wrap">
           Building: {{person.building}}
