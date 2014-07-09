@@ -13,10 +13,6 @@ angular.module('WITPhoneApp.controllers', [])
                 $scope.staff = response;
             });
         }
-        $scope.getItemHeight = function(item, index) {
-            //Make evenly indexed items be 10px taller, for the sake of example
-            return (index % 2) === 0 ? 50 : 60;
-        };
     })
 
     .controller('StaffDetailCtrl', function ($scope, $stateParams, StaffList) {
