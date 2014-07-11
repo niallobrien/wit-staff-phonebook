@@ -12,6 +12,8 @@
         </button>
     </ion-header-bar>
     <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="list">
             <a class="item my-item"
                collection-repeat="person in staff | filter:searchStaffList | orderBy:'title' track by person.entry_id"

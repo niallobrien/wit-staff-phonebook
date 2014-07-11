@@ -10,7 +10,7 @@ angular.module('WITPhoneApp.services', [])
 
         return {
             all: function () {
-                return staffList = $http.get('http://www.wit.ie/api/get_channel_entries?channel_id=60', {
+                return $http.get('http://www.wit.ie/api/get_channel_entries?channel_id=60', {
                     cache: true
                 })
             },
@@ -24,6 +24,31 @@ angular.module('WITPhoneApp.services', [])
             },
             save: function (data) {
                 window.localStorage['staff_list'] = data;
+            },
+            update: function (staffList) {
+                // get local last updated timestamp
+                var lastUpdatedLocal = "";
+                var lastUpdatedRemote = "";
+                for (i=0; i < staffList.length; i++) {
+                    // get largest (most recent) timestamp
+                    if(staffList[i].entry_date > lastUpdatedLocal) {
+                        lastUpdatedLocal = staffList[i].entry_date;
+                    }
+                }
+                // return newest entry based on the timestamp
+                //console.log(lastUpdatedLocal);
+
+                // get remote last updated timestamp
+                var promise = $http.get('http://www.wit.ie/api/get_channel_entries?channel_id=60&order_by=entry_date&limit=1')
+                    .success(function(data, status, header, config) {
+                        return lastUpdatedRemote = data[0].entry_date;
+                        //console.log("Local: " + lastUpdatedLocal + ". Remote: " + lastUpdatedRemote);
+                    }).then(function(response) {
+                        return response.data[0].entry_date;
+                    }).then(function(response) {
+                       return response;
+                    });
+                console.log(promise);
             }
         }
     });
