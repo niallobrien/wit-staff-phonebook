@@ -1,6 +1,6 @@
 angular.module('WITPhoneApp.controllers', [])
 
-    .controller('StaffCtrl', function ($scope, StaffList) {
+    .controller('StaffCtrl', function ($scope, StaffList, $q) {
         var staffList = angular.fromJson(window.localStorage['staff_list']);
 
         // self-executing function
@@ -18,14 +18,12 @@ angular.module('WITPhoneApp.controllers', [])
         }());
 
         // pull-down to refresh - get the list, then save it first
-        $scope.doRefresh = function() {
-
-            // check local last updated timestamp against remote
-            // if the remote differs, redownload all remote data
-            // update localstorage with new data
-
-            checkForUpdatedStaffList();
-            saveStaffList();
+        $scope.doRefresh = function () {
+            updatedStaffList()
+                .finally(function () {
+                    // Stop the ion-refresher from spinning
+                    $scope.$broadcast('scroll.refreshComplete');
+                });
         };
 
         function getStaffList() {
@@ -35,9 +33,15 @@ angular.module('WITPhoneApp.controllers', [])
             });
         }
 
-        function checkForUpdatedStaffList() {
-            StaffList.update(staffList);
-
+        function updatedStaffList() {
+            var localTimestamp = parseInt(StaffList.getLocalTimestamp(staffList));
+            var remoteTimestamp = "";
+            return StaffList.getRemoteTimestamp(staffList).then(function (data) {
+                var remoteTimestamp = parseInt(data.data[0].entry_date);
+                if (localTimestamp <= remoteTimestamp) {
+                    getStaffList();
+                }
+            })
         }
     })
 
