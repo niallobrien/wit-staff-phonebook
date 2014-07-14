@@ -11,11 +11,15 @@
                 ng-click="clearSearch()">
         </button>
     </ion-header-bar>
-    <ion-content>
+    <div class="bar bar-flash-message bar-calm" ng-if="flash.hasMessage">
+        {{flash.message}}
+    </div>
+
+    <ion-content ng-class="{'has-flash-message': flash.hasMessage}">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
         </ion-refresher>
         <div class="list">
-            <a class="item my-item"
+            <a class="item my-item item-avatar"
                collection-repeat="person in staff | filter:searchStaffList | orderBy:'title' track by person.entry_id"
                collection-item-width="'100%'"
                collection-item-height="60"

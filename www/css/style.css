@@ -1,7 +1,51 @@
-/* Empty. Add your own CSS if you like */
 .list .my-item.item {
     left: 0;
     right: 0;
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.content {
+    margin-top:44px;
+}
+/*Flash messages*/
+.bar.bar-flash-message {
+    display: block;
+    height: 44px;
+
+    /* starts right below a normal header */
+    top: 44px;
+
+    /* make the text centered vertically and horizontally */
+    text-align: center;
+    padding: 0;
+    line-height: 24px;
+
+    /* transition 'sliding down' (check below)*/
+    -webkit-transition: 200ms all;
+}
+
+
+/*
+ * make the content's top changes animate.
+ * might not always look good, but looks
+ * good when our loader is added & removed
+ */
+.has-header {
+    -webkit-transition: 200ms top;
+}
+.has-header.has-flash-message {
+    /* 44px (header) + 24px */
+    top: 88px;
+}
+
+/* make loading bar slide up/down */
+.bar-flash-message.ng-enter,
+.bar-flash-message.ng-leave.ng-leave-active {
+    height: 0;
+    border-width: 0px;
+}
+.bar-flash-message.ng-enter.ng-enter-active,
+.bar-flash-message.ng-leave {
+    height: 24px;
+    border-width: 1px;
 }

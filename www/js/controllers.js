@@ -1,6 +1,6 @@
 angular.module('WITPhoneApp.controllers', [])
 
-    .controller('StaffCtrl', function(StaffList, $scope) {
+    .controller('StaffCtrl', function (StaffList, $scope, $timeout) {
         var staffList = angular.fromJson(window.localStorage['staff_list']);
 
         // self-executing function
@@ -9,7 +9,6 @@ angular.module('WITPhoneApp.controllers', [])
                 $scope.staff = [];
                 for (var i = 0; i < staffList.length; i++) {
                     $scope.staff.push(staffList[i]);
-                    //console.log($scope.staff);
                 }
             } else {
                 getStaffList();
@@ -18,22 +17,41 @@ angular.module('WITPhoneApp.controllers', [])
         }());
 
         // pull-down to refresh - get the list, then save it first
-        $scope.doRefresh = function () {
+        $scope.doRefresh = function() {
+            console.log($scope.staff);
             StaffList.update($scope.staff).then(function (newStaffList) {
                 // Promise was resolved. List needs updating!
                 $scope.staffList = newStaffList;
             }, function () {
                 // Promise was rejected. No update needed!
+                $scope.flash = {
+                    hasMessage: true,
+                    message: "No updates available."
+                };
+
+                $timeout(function () {
+                    $scope.flash = { hasMessage: false};
+                }, 2000);
+
             }).finally(function () {
                 // Stop the ion-refresher from spinning
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
 
+
         function getStaffList() {
             StaffList.all().success(function (response) {
                 StaffList.save(angular.toJson(response));
                 $scope.staff = response;
+
+                // Update local store list
+                    StaffList.update($scope.staff).then(function (newStaffList) {
+                        // Promise was resolved. List needs updating!
+                        $scope.staffList = newStaffList;
+                    }, function () {
+                        // Promise was rejected. No update needed!
+                    });
             });
         }
     })
