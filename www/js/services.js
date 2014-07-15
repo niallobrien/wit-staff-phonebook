@@ -7,6 +7,7 @@ angular.module('WITPhoneApp.services', [])
  * A simple example service that returns some data.
  */
     .factory('StaffList', function ($http, $q) {
+        var _isUpdating = {isUpdating: false};
 
         return {
             all: function () {
@@ -80,6 +81,7 @@ angular.module('WITPhoneApp.services', [])
                     .success(function (data, status, headers, config) {
                         return data;
                     });
-            }
+            },
+            isUpdating: _isUpdating
         }
     });

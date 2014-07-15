@@ -20,10 +20,14 @@
     padding: 0;
     line-height: 24px;
 
-    /* transition 'sliding down' (check below)*/
+    /* transition 'sliding down'*/
     -webkit-transition: 200ms all;
 }
 
+/* Style nav-bar buttons */
+ion-nav-bar button {
+    font-size: 26px !important;
+}
 
 /*
  * make the content's top changes animate.
@@ -35,7 +39,7 @@
 }
 .has-header.has-flash-message {
     /* 44px (header) + 24px */
-    top: 88px;
+    top: 68px;
 }
 
 /* make loading bar slide up/down */

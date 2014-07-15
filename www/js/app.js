@@ -55,7 +55,7 @@ angular.module('WITPhoneApp', ['ionic', 'WITPhoneApp.controllers', 'WITPhoneApp.
           controller: 'StaffDetailCtrl'
         }
       }
-    })
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/staff');
