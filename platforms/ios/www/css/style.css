@@ -4,11 +4,13 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
+.content {
+    margin-top:44px;
+}
 /*Flash messages*/
 .bar.bar-flash-message {
     display: block;
-    height: 24px;
+    height: 44px;
 
     /* starts right below a normal header */
     top: 44px;
@@ -18,10 +20,14 @@
     padding: 0;
     line-height: 24px;
 
-    /* transition 'sliding down' (check below)*/
+    /* transition 'sliding down'*/
     -webkit-transition: 200ms all;
 }
 
+/* Style nav-bar buttons */
+ion-nav-bar button {
+    font-size: 26px !important;
+}
 
 /*
  * make the content's top changes animate.

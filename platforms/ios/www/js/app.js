@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('WITPhoneApp', ['ionic', 'WITPhoneApp.controllers', 'WITPhoneApp.services'])
+angular.module('WITPhoneApp', ['ionic', 'WITPhoneApp.controllers', 'WITPhoneApp.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -55,7 +55,7 @@ angular.module('WITPhoneApp', ['ionic', 'WITPhoneApp.controllers', 'WITPhoneApp.
           controller: 'StaffDetailCtrl'
         }
       }
-    })
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/staff');
